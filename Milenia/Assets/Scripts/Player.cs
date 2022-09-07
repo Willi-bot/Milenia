@@ -29,15 +29,14 @@ public class Player : MonoBehaviour
         Vector3 transPos = transform.position;
         Vector3 hitBoxPosition = new Vector3(transPos.x + _colliderOffset.x, 
             transPos.y + _colliderOffset.y, 0);
-
+        
         _hit = Physics2D.BoxCast(hitBoxPosition, _boxCollider.size, 0, 
             new Vector2(0, _moveDelta.y), Mathf.Abs(_moveDelta.y * Time.deltaTime * 3), 
-            LayerMask.GetMask("Default", "MapBounds"));
+            LayerMask.GetMask("Default", "MapBounds", "TriggerBox"));
         if (_hit.collider is null)
         {
             transform.Translate(0, _moveDelta.y * (Time.deltaTime * 3), 0);
         }
-        
         _hit = Physics2D.BoxCast(hitBoxPosition, _boxCollider.size, 0, 
             new Vector2(_moveDelta.x, 0), Mathf.Abs(_moveDelta.x * Time.deltaTime * 3), 
             LayerMask.GetMask("Default", "MapBounds"));
