@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TowerMap.unity
     guid: 41cfe273fb811514ea788a74ba8fff34
   - enabled: 1
-    path: Assets/Scenes/Townhall.unity
+    path: Assets/Scenes/TownMap.unity
     guid: 58507a5c9b3d95349a2a8f23c7c26e85
   m_configObjects: {}

@@ -56,12 +56,14 @@ public class CameraMotor : MonoBehaviour
 
         if (delta.x != 0 || delta.y != 0)
         {
-            Vector3 targetPosition = new Vector3(transform.position.x + delta.x, transform.position.y + delta.y, -10);
+            Vector3 camPosition = transform.position;
+            
+            Vector3 targetPosition = new Vector3(camPosition.x + delta.x, camPosition.y + delta.y, -10);
 
             targetPosition.x = Mathf.Clamp(targetPosition.x, minPosition.x, maxPosition.x);
             targetPosition.y = Mathf.Clamp(targetPosition.y, maxPosition.y, minPosition.y);
             
-            transform.position = Vector3.Lerp(transform.position, targetPosition, smoothingFactor);
+            transform.position = Vector3.Lerp(camPosition, targetPosition, smoothingFactor);
         }
     }
 }
