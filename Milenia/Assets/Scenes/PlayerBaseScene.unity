@@ -202,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.33, y: -0.39, z: -10}
+  m_LocalPosition: {x: -0.38, y: -0.35, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -225,8 +225,8 @@ MonoBehaviour:
   boundX: 0.15
   boundY: 0.05
   smoothingFactor: 0.01
-  minPosition: {x: -4.11, y: 2.99}
-  maxPosition: {x: 4.09, y: -2.99}
+  minPosition: {x: -5, y: 3.5}
+  maxPosition: {x: 5, y: -3.5}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,7 +306,7 @@ GameObject:
   m_Layer: 7
   m_Name: MoveTower
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -323,7 +323,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.6, y: -0.51}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -334,7 +334,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 2}
+  m_Size: {x: 0.6, y: 2}
   m_EdgeRadius: 0
 --- !u!4 &838162592
 Transform:
@@ -344,7 +344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838162590}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.013632, y: -1.2652625, z: -0.08926921}
+  m_LocalPosition: {x: 12.7, y: -3, z: -0.08926921}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -378,7 +378,7 @@ GameObject:
   m_Layer: 7
   m_Name: MoveTownhall
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -408,7 +408,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -19.9, y: 1.49}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -419,7 +419,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 2}
+  m_Size: {x: 0.6, y: 2}
   m_EdgeRadius: 0
 --- !u!4 &1101819322
 Transform:
@@ -429,7 +429,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1101819319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.013632, y: -1.2652625, z: -0.08926921}
+  m_LocalPosition: {x: -12.7, y: -1, z: -0.08926921}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -575,6 +575,7 @@ GameObject:
   - component: {fileID: 1541470546}
   - component: {fileID: 1541470548}
   - component: {fileID: 1541470547}
+  - component: {fileID: 1541470549}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -4912,6 +4913,39 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!60 &1541470549
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541470545}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 14, y: 9}
+      - {x: -14, y: 9}
+      - {x: -14, y: -9}
+      - {x: 14, y: -9}
+    - - {x: 13, y: 8}
+      - {x: -13, y: 8}
+      - {x: -13, y: -8}
+      - {x: 13, y: -8}
 --- !u!1 &2101921615
 GameObject:
   m_ObjectHideFlags: 0
