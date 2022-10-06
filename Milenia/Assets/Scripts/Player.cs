@@ -6,6 +6,8 @@ using UnityEngine.Serialization;
 public class Player : MonoBehaviour
 {
     public float playerSpeed = 4.5f;
+
+    private int _idleLoops = 0;
     
     private BoxCollider2D _boxCollider;
     private Vector2 _colliderOffset;
@@ -18,6 +20,8 @@ public class Player : MonoBehaviour
     private static readonly int Vertical = Animator.StringToHash("Vertical");
     private static readonly int Horizontal = Animator.StringToHash("Horizontal");
     private static readonly int Speed = Animator.StringToHash("Speed");
+    private static readonly int IdleTime = Animator.StringToHash("IdleTime");
+    private static readonly int Blink = Animator.StringToHash("Blink");
 
     // Start is called before the first frame update
     void Start()
@@ -31,9 +35,24 @@ public class Player : MonoBehaviour
     void Update()
     {
 
+        if(_animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            _idleLoops++;
+            if (_idleLoops == 3000)
+            {
+                print("Loop trigger set");
+                _animator.SetTrigger(Blink);
+                _idleLoops = 0;
+            }
+        }
+        else
+        {
+            _idleLoops = 0;
+        }
+        
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
-
+        
         
         _animator.SetFloat(Horizontal, x);
         _animator.SetFloat(Vertical, y);
