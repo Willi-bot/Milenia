@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Town.unity
     guid: 58507a5c9b3d95349a2a8f23c7c26e85
+  - enabled: 1
+    path: Assets/Scenes/TowerEntrance.unity
+    guid: 2b6c27d1436a7e14a8d3351c1638cbe0
   m_configObjects: {}
