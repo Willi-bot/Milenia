@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ForrestWestDoor
   - ForrestNorthDoor
+  - Panel
   layers:
   - Default
   - TransparentFX

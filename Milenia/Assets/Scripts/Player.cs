@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
     private static readonly int IdleTime = Animator.StringToHash("IdleTime");
     private static readonly int Blink = Animator.StringToHash("Blink");
 
+    public bool activeInGame = true;
+    public GameObject inventoryPanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,53 +37,83 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        if (activeInGame)
         {
-            _idleLoops++;
-            if (_idleLoops == 3000)
+            if (Input.GetKeyDown(KeyCode.I))
             {
-                print("Loop trigger set");
-                _animator.SetTrigger(Blink);
+                GameObject[] allPanels = GameObject.FindGameObjectsWithTag("Panel");
+                bool noPanelsActive = true;
+                foreach (GameObject panel in allPanels)
+                {
+                    if (panel.activeInHierarchy)
+                    {
+                        noPanelsActive = false;
+                        break;
+                    }
+                }
+
+                if (noPanelsActive)
+                {
+                    activeInGame = false;
+                    inventoryPanel.SetActive(true);
+                }
+            }
+
+            if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                _idleLoops++;
+                if (_idleLoops == 3000)
+                {
+                    print("Loop trigger set");
+                    _animator.SetTrigger(Blink);
+                    _idleLoops = 0;
+                }
+            }
+            else
+            {
                 _idleLoops = 0;
             }
+
+            float x = Input.GetAxisRaw("Horizontal");
+            float y = Input.GetAxisRaw("Vertical");
+
+
+            _animator.SetFloat(Horizontal, x);
+            _animator.SetFloat(Vertical, y);
+
+            _moveDelta = new Vector3(x, y, 0);
+
+
+            _animator.SetFloat(Speed, _moveDelta.sqrMagnitude);
+
+            Vector3 transPos = transform.position;
+            Vector3 hitBoxPosition = new Vector3(transPos.x + _colliderOffset.x,
+                transPos.y + _colliderOffset.y, 0);
+
+            _hit = Physics2D.BoxCast(hitBoxPosition, _boxCollider.size, 0,
+                new Vector2(0, _moveDelta.y), Mathf.Abs(_moveDelta.y * Time.deltaTime * playerSpeed),
+                LayerMask.GetMask("Default", "MapBounds", "TriggerBox"));
+            if (_hit.collider is null)
+            {
+                transform.Translate(0, _moveDelta.y * (Time.deltaTime * playerSpeed), 0);
+            }
+
+            _hit = Physics2D.BoxCast(hitBoxPosition, _boxCollider.size, 0,
+                new Vector2(_moveDelta.x, 0), Mathf.Abs(_moveDelta.x * Time.deltaTime * playerSpeed),
+                LayerMask.GetMask("Default", "MapBounds"));
+            if (_hit.collider is null)
+            {
+                transform.Translate(_moveDelta.x * (Time.deltaTime * playerSpeed), 0, 0);
+            }
+
         }
         else
         {
-            _idleLoops = 0;
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                activeInGame = true;
+                inventoryPanel.SetActive(false);
+            }
         }
-        
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
-        
-        
-        _animator.SetFloat(Horizontal, x);
-        _animator.SetFloat(Vertical, y);
-
-        _moveDelta = new Vector3(x, y, 0);
-        
-        
-        _animator.SetFloat(Speed, _moveDelta.sqrMagnitude);
-        
-        Vector3 transPos = transform.position;
-        Vector3 hitBoxPosition = new Vector3(transPos.x + _colliderOffset.x, 
-            transPos.y + _colliderOffset.y, 0);
-        
-        _hit = Physics2D.BoxCast(hitBoxPosition, _boxCollider.size, 0, 
-            new Vector2(0, _moveDelta.y), Mathf.Abs(_moveDelta.y * Time.deltaTime * playerSpeed), 
-            LayerMask.GetMask("Default", "MapBounds", "TriggerBox"));
-        if (_hit.collider is null)
-        {
-            transform.Translate(0, _moveDelta.y * (Time.deltaTime * playerSpeed), 0);
-        }
-        _hit = Physics2D.BoxCast(hitBoxPosition, _boxCollider.size, 0, 
-            new Vector2(_moveDelta.x, 0), Mathf.Abs(_moveDelta.x * Time.deltaTime * playerSpeed), 
-            LayerMask.GetMask("Default", "MapBounds"));
-        if (_hit.collider is null)
-        {
-            transform.Translate(_moveDelta.x * (Time.deltaTime * playerSpeed),0, 0);
-        }
-        
-        
     }
 }
