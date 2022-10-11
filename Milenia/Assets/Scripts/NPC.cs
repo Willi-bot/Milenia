@@ -47,14 +47,27 @@ public class NPC : MonoBehaviour
             {
                 if (_scrollingDone)
                 {
-
                     NextLine();
                 }
             }
             else
             {
-                dialoguePanel.SetActive(true);
-                StartCoroutine(Typing());
+                GameObject[] allPanels = GameObject.FindGameObjectsWithTag("Panel");
+                bool noPanelsActive = true;
+                foreach (GameObject panel in allPanels)
+                {
+                    if (panel.activeInHierarchy)
+                    {
+                        noPanelsActive = false;
+                        break;
+                    }
+                }
+
+                if (noPanelsActive)
+                {
+                    dialoguePanel.SetActive(true);
+                    StartCoroutine(Typing());
+                }
             }
         }
 
