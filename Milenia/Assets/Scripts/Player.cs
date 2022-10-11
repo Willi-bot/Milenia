@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     public bool activeInGame = true;
     public GameObject inventoryPanel;
+    public GameObject skilltreePanel;
+    private GameObject _activePanel;
 
     // Start is called before the first frame update
     void Start()
@@ -41,21 +43,25 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                GameObject[] allPanels = GameObject.FindGameObjectsWithTag("Panel");
-                bool noPanelsActive = true;
-                foreach (GameObject panel in allPanels)
-                {
-                    if (panel.activeInHierarchy)
-                    {
-                        noPanelsActive = false;
-                        break;
-                    }
-                }
+                bool noPanelsActive = CheckIfAllPanelsActive();
 
                 if (noPanelsActive)
                 {
                     activeInGame = false;
                     inventoryPanel.SetActive(true);
+                    _activePanel = inventoryPanel;
+                }
+            }
+            
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                bool noPanelsActive = CheckIfAllPanelsActive();
+
+                if (noPanelsActive)
+                {
+                    activeInGame = false;
+                    skilltreePanel.SetActive(true);
+                    _activePanel = skilltreePanel;
                 }
             }
 
@@ -109,11 +115,28 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.I))
+            if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.U))
             {
                 activeInGame = true;
-                inventoryPanel.SetActive(false);
+                _activePanel.SetActive(false);
+                _activePanel = null;
             }
         }
     }
+
+    private bool CheckIfAllPanelsActive()
+    {
+        GameObject[] allPanels = GameObject.FindGameObjectsWithTag("Panel");
+        
+        foreach (GameObject panel in allPanels)
+        {
+            if (panel.activeInHierarchy)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
 }
